@@ -4,41 +4,76 @@
 <head>
   <meta charset="utf-8">
   <title>Christmas</title>
-  <script src="vue.js"></script>
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"> -->
+  <link href="bootstrap.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link href="material-dashboard.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
-  <div id="christmas">
+  <div class="wrapper" id="christmas">
     <div class="sidebar">
-      <ul>
-        <li v-for="member in members" v-on:click="changeActiveMember(member)">
-          {{ member.name }}
-          <ul>
-            <li v-for="gift in member.gifts">
-              <input type="checkbox" v-model="gift.claimed" />
-              {{ gift.gift }}
-              <input v-model="gift.claimee" />
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <div class="logo">
+        <a href="#" class="simple-text">Christmas</a>
+      </div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li v-for="member in members" @click="changeActiveMember(member)">
+            <a href="#"><i class="material-icons">person</i> <p>{{ member.name }}</p></a>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div>
-      <h1>Active Member Data</h1>
-      <h3>{{ activeMember.name }}</h3>
-      <ul>
-        <li v-for="gift in activeMember.gifts">
-          <input type="checkbox" v-model="gift.claimed" />
-          {{ gift.gift }}
-          <input v-model="gift.claimee" />
-        </li>
-      </ul>
-      <button v-on:click="saveActiveMember()">Save</button>
+    <div class="main-panel">
+      <div>
+        <h1>{{ activeMember.name }}'s Chrismas list</h1>
+        <ul>
+          <li v-for="gift in activeMember.gifts">
+            <input type="checkbox" v-model="gift.claimed" />
+            <label>{{ gift.gift }}</label>
+            <input v-model="gift.claimee" />
+          </li>
+        </ul>
+        <button v-on:click="saveActiveMember()">Save</button>
+      </div>
+
+      <div class="card">
+      <div class="card-header" data-background-color="red">
+        <h4>{{ activeMember.name }}</h4>
+      </div>
+      <div class="card-content">
+        <table class="table">
+          <tbody>
+            <tr v-for="gift in activeMember.gifts">
+              <td class="checkbox">
+                <label>
+                  <input type="checkbox" v-model="gift.claimed" />
+                </label>
+              </td>
+              <td>
+                <input type="checkbox" v-model="gift.claimed" />
+              </td>
+              <td>{{ gift.gift }}</td>
+              <td>
+                <input v-model="gift.claimee" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
     </div>
   </div>
 
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.7.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-storage.js"></script> -->
   <script src="app.js"></script>
+  <script src="vue.js"></script>
 </body>
 
 </html>
