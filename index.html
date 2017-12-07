@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Christmas</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="christmas">
+    <div class="sidebar">
+      <ul>
+        <li v-for="member in members" v-on:click="changeActiveMember(member)">
+          {{ member.name }}
+          <ul>
+            <li v-for="gift in member.gifts">
+              <input type="checkbox" v-model="gift.claimed" />
+              {{ gift.gift }}
+              <input v-model="gift.claimee" />
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h1>Active Member Data</h1>
+      <h3>{{ activeMember.name }}</h3>
+      <ul>
+        <li v-for="gift in activeMember.gifts">
+          <input type="checkbox" v-model="gift.claimed" />
+          {{ gift.gift }}
+          <input v-model="gift.claimee" />
+        </li>
+      </ul>
+      <button v-on:click="saveActiveMember()">Save</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
